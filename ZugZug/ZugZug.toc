@@ -1,0 +1,10 @@
+## Interface: 30300
+## Title: Zug Zug
+## Notes: An addon for Zug Zug WOTLK
+## Author: Cows / Axiom / Ben
+## Version: 0.0.1-wotlk
+## SavedVariables: ZugZugDB, Zugbot
+
+ZugZugUtils.lua
+ZugZug.lua
+Zugbot.lua
