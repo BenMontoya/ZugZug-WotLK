@@ -120,9 +120,12 @@ local function OnAddonMessage(prefix, message, channel, sender)
     local data = string.sub(message, sep + 1)
 
     if senderName == ZugZug.BOTNAME then 
-        if cmd == "AHSYNC" then 
+        if cmd == "AHSCAN" then 
             local status = data or "unknown"
             ZugLog(ClassColorize(senderName) .. " Auction House scan: " .. status)
+        end
+        if cmd == "LOGIN" and ZugZug.SHOULD_SYNC_ROSTER then 
+            ZugLog(ClassColorize(senderName) .. " synced roster data.")
         end
         return
     end
