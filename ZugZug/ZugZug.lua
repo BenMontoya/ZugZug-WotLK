@@ -18,7 +18,6 @@ ChatFrame_AddMessageEventFilter("CHAT_MSG_WHISPER", ZugChatNameFilter)
 
 local function ShowHelp()
     ZugLog("Commands:")
-    ZugLog("|cff00ff00/zug dmf|r - Darkmoon Faire (RIP)")
     ZugLog("|cff00ff00/zug shellcoin|r - Shellcoin Price")
     ZugLog("|cff00ff00/zug nick Name Nickname|r - Set nickname by character name")
     ZugLog("|cff00ff00/zug nick Nickname|r - Set nickname for your current target")
@@ -27,18 +26,6 @@ end
 
 local function HandlePing(args)
     ZugLog("PONG! Zug Zug, " .. ClassColorize(UnitName("player")) .. "!")
-end
-
-local function HandleDMF()
-    local dmf = GetCurrentDMFInfo()
-    if not dmf then return end
-
-    local current = "|cFF00FF00" .. dmf.current.name .. " (" .. dmf.current.zone .. ")|r"
-    local nextLoc = "|cFF00FF00" .. dmf.next.name .. " (" .. dmf.next.zone .. ")|r"
-    local remaining = "|cFFFFFF00" .. FormatTimeRemaining(dmf.nextMove) .. "|r"
-
-    ZugLog("Darkmoon Faire is currently in " .. current)
-    ZugLog("Will be in " .. nextLoc .. " in " .. remaining)
 end
 
 local function HandleRIPTurtle()
@@ -110,7 +97,6 @@ local function OnSlashCommand(msg)
     local cmd, args = ParseCommand(msg)
 
     if cmd == "ping" then HandlePing(args) return end
-    if cmd == "dmf" or cmd == "moon" then HandleDMF() return end
     if cmd == "shellcoin" then HandleRIPTurtle() return end
     if cmd == "nick" then HandleNickname(args) return end
     if cmd == "clearnick" then HandleClearNickname(args) return end
