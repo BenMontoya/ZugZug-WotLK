@@ -133,6 +133,13 @@ local function OnAddonMessage(prefix, message, channel, sender)
     local cmd = string.upper(string.sub(message, 1, sep - 1))
     local data = string.sub(message, sep + 1)
 
+    if senderName == ZugZug.BOTNAME then 
+        if cmd == "AHSYNC" then 
+            local status = data or "unknown"
+            ZugLog(ClassColorize(senderName) .. " Auction House scan: " .. status)
+        end
+        return
+    end
     if cmd == "LOGIN" then 
         local version = data or "unknown"
         ZugLog(ClassColorize(senderName) .. " logged in with Zug Zug addon version |cff00ff00" .. version .. "|r")

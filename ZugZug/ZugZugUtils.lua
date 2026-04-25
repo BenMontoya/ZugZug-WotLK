@@ -306,6 +306,8 @@ function HandleLogin()
     end
 end
 
+
+-- Optional Roster Sync
 local rosterPoller = CreateFrame("Frame")
 local lastRosterPoll = 0
 local rosterPollInterval = 120
@@ -318,38 +320,3 @@ rosterPoller:SetScript("OnUpdate", function()
     lastRosterPoll = now
     GuildRoster()
 end)
-
--- ============
--- RIP Turtle
--- ============
-ZugZug.DMF_REFERENCE = 1697328000
-ZugZug.DMF_PERIOD = 60 * 60 * 24 * 7
-ZugZug.DMF_LOCATIONS = {
-    { name = "Thunder Bluff", zone = "Mulgore" },
-    { name = "Goldshire", zone = "Elwynn Forest" },
-}
-function GetCurrentDMFInfo()
-    local now = time()
-    local ref = ZugZug.DMF_REFERENCE
-    local period = ZugZug.DMF_PERIOD
-    local locations = ZugZug.DMF_LOCATIONS
-    
-    local count = table.getn(locations)
-    if count < 2 then return nil end
-    
-    local weeksPassed = floor((now - ref) / period)
-    if weeksPassed < 0 then weeksPassed = 0 end
-    
-    local cyclesPassed = floor(weeksPassed / count)
-    local currentIndex = weeksPassed - (cyclesPassed * count) + 1
-    
-    local nextIndex = currentIndex + 1
-    if nextIndex > count then nextIndex = 1 end
-    local nextMove = ref + ((weeksPassed + 1) * period)
-    
-    return {
-        current = locations[currentIndex],
-        next = locations[nextIndex],
-        nextMove = nextMove
-    }
-end
